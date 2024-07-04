@@ -1,36 +1,28 @@
-<plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.12.4</version>
-        <configuration>
-          <additionalClasspathElements>
-            <additionalClasspathElement>path/to/additional/resources</additionalClasspathElement>
-            <additionalClasspathElement>path/to/additional/jar</additionalClasspathElement>
-          </additionalClasspathElements>
-        </configuration>
-      </plugin>
-    </plugins>
+package com.example.demo;
 
-
-
-
-<plugin>
-    <groupId>com.sun.xml.ws</groupId>
-    <artifactId>jaxws-maven-plugin</artifactId>
-    <version>4.0.2</version>
-    <executions>
-        <execution>
-            <goals>
-                <goal>wsimport</goal>
-            </goals>
-        </execution>
-    </executions>
-    <configuration>
-        <wsdlDirectory>${project.basedir}/src/main/resources/</wsdlDirectory>
-        <packageName>com.baeldung.soap.ws.client</packageName>
-        <sourceDestDir>
-            ${project.build.directory}/generated-sources/
-        </sourceDestDir>
-    </configuration>
-</plugin>
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+// Spring Boot 2.x
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+// Spring Boot 1.x
+//import org.springframework.boot.web.support.SpringBootServletInitializer;
+ 
+@SpringBootApplication
+public class DemoApplication extends SpringBootServletInitializer {
+ 
+    public static void main(String[] args) {
+        SpringApplication.run(applicationClass, args);
+    }
+ 
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(applicationClass);
+    }
+ 
+    private static Class<DemoApplication> applicationClass = DemoApplication.class;
+}
+ 
